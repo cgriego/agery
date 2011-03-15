@@ -2,12 +2,12 @@ require 'spec_helper'
 
 module Agery
   describe "Agery::VERSION" do
-    subject { VERSION }
+    subject { Agery::VERSION }
 
     it { should be_a_kind_of String }
 
     describe "is compliant with Semantic Versioning <http://semver.org/>" do
-      let(:gem_version) { Gem::Version.new VERSION }
+      let(:gem_version) { Gem::Version.new Agery::VERSION }
       subject { gem_version }
 
       it { subject.should have(3).segments }

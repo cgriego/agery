@@ -2,30 +2,31 @@ require 'spec_helper'
 
 module Agery
   describe "Agery::ADULT" do
-    it { ADULT.should == -1 }
+    it { Agery::ADULT.should == -1 }
   end
 
   describe "Agery::INFANT" do
-    it { INFANT.should == 0 }
+    it { Agery::INFANT.should == 0 }
   end
 
   describe "Agery::CHILD" do
-    it { CHILD.should == 0 }
+    it { Agery::CHILD.should == 0 }
   end
 
   describe "Agery::TEENAGER" do
-    it { TEENAGER.should == 13 }
+    it { Agery::TEENAGER.should == 13 }
   end
 
   describe "Agery::SENIOR" do
-    it { SENIOR.should == 65 }
+    it { Agery::SENIOR.should == 65 }
   end
 end
 
 describe "overriding the age constants" do
   around do |example|
     old_verbose, $VERBOSE = $VERBOSE, nil
-    eval "old_age, #{constant} = #{constant}, #{age}"
+    old_age = eval(constant)
+    eval "#{constant} = #{age}"
     $VERBOSE = old_verbose
 
     example.run
