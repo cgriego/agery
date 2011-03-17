@@ -16,20 +16,23 @@ price.
 
 ## Examples
 
-* `1.adult #=> [-1]`
-* `3.teenagers #=> [13, 13, 13]`
-* `2.infants #=> [0, 0]`
-* `0.children #=> []`
-* `2.seniors #=> [65, 65]`
-* `2.adults + 1.child #=> [-1, -1, 0]`
-* `1.over_21 #=> [21]`
-* `2.under_18 #=> [17, 17]`
+    1.adult #=> [-1]
+    3.teenagers #=> [13, 13, 13]
+    2.infants #=> [0, 0]
+    0.children #=> []
+    2.seniors #=> [65, 65]
+    2.adults + 1.child #=> [-1, -1, 0]
+    1.over_21 #=> [21]
+    2.under_18 #=> [17, 17]
 
 ## Customization
 
 You can override Agery's concept of the age of an adult, infant, child,
-teenager, and senior by overriding the Agery constant of the same name.
+teenager, and senior by setting the Agery accessor of the same name.
+
+    Agery.adult = 18
+    2.adults #=> [18, 18]
 
 ## Installation
 
-`gem install agery`
+`$ gem install agery`

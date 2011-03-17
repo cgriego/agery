@@ -1,40 +1,44 @@
 module Agery
-  ADULT    = -1
-  INFANT   =  0
-  CHILD    =  0
-  TEENAGER = 13
-  SENIOR   = 65
-
   AGE_OVER  = /^over_(0|[1-9]\d*)$/.freeze
   AGE_UNDER = /^under_([1-9]\d*)$/.freeze
 
+  @adult    = -1
+  @infant   =  0
+  @child    =  0
+  @teenager = 13
+  @senior   = 65
+
+  class << self
+    attr_accessor :adult, :infant, :child, :teenager, :senior
+  end
+
   def adults
-    to_age_a ADULT
+    to_age_a Agery.adult
   end
   alias :adult :adults
 
   def infants
-    to_age_a INFANT
+    to_age_a Agery.infant
   end
   alias :infant :infants
 
   def children
-    to_age_a CHILD
+    to_age_a Agery.child
   end
   alias :child :children
 
   def teenagers
-    to_age_a TEENAGER
+    to_age_a Agery.teenager
   end
   alias :teenager :teenagers
 
   def seniors
-    to_age_a SENIOR
+    to_age_a Agery.senior
   end
   alias :senior :seniors
 
   def respond_to?(method, *)
-    AGE_OVER === method.to_s || AGE_UNDER === method.to_s || super
+    super || AGE_OVER === method.to_s || AGE_UNDER === method.to_s
   end
 
   def method_missing(method, *)

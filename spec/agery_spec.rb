@@ -1,43 +1,37 @@
 require 'spec_helper'
 
-module Agery
-  describe "Agery::ADULT" do
-    it { Agery::ADULT.should == -1 }
+describe Agery do
+  describe ".adult" do
+    it { described_class.adult.should == -1 }
   end
 
-  describe "Agery::INFANT" do
-    it { Agery::INFANT.should == 0 }
+  describe ".infant" do
+    it { described_class.infant.should == 0 }
   end
 
-  describe "Agery::CHILD" do
-    it { Agery::CHILD.should == 0 }
+  describe ".child" do
+    it { described_class.child.should == 0 }
   end
 
-  describe "Agery::TEENAGER" do
-    it { Agery::TEENAGER.should == 13 }
+  describe ".teenager" do
+    it { described_class.teenager.should == 13 }
   end
 
-  describe "Agery::SENIOR" do
-    it { Agery::SENIOR.should == 65 }
+  describe ".senior" do
+    it { described_class.senior.should == 65 }
   end
 end
 
-describe "overriding the age constants" do
+describe "overriding the age configuration" do
   around do |example|
-    old_verbose, $VERBOSE = $VERBOSE, nil
-    old_age = eval(constant)
-    eval "#{constant} = #{age}"
-    $VERBOSE = old_verbose
-
+    old_age = Agery.send(method)
+    Agery.send("#{method}=", age)
     example.run
-
-    old_verbose, $VERBOSE = $VERBOSE, nil
-    eval "#{constant} = old_age"
-    $VERBOSE = old_verbose
+    Agery.send("#{method}=", old_age)
   end
 
-  context "ADULT = 21" do
-    let(:constant) { "Agery::ADULT" }
+  context "adult = 21" do
+    let(:method) { :adult }
     let(:age) { 21 }
 
     describe 2 do
@@ -45,8 +39,8 @@ describe "overriding the age constants" do
     end
   end
 
-  context "INFANT = -1" do
-    let(:constant) { "Agery::INFANT" }
+  context "infant = -1" do
+    let(:method) { :infant }
     let(:age) { -1 }
 
     describe 2 do
@@ -54,8 +48,8 @@ describe "overriding the age constants" do
     end
   end
 
-  context "CHILD = 2" do
-    let(:constant) { "Agery::CHILD" }
+  context "child = 2" do
+    let(:method) { :child }
     let(:age) { 2 }
 
     describe 2 do
@@ -63,8 +57,8 @@ describe "overriding the age constants" do
     end
   end
 
-  context "TEENAGER = 16" do
-    let(:constant) { "Agery::TEENAGER" }
+  context "teenager = 16" do
+    let(:method) { :teenager }
     let(:age) { 16 }
 
     describe 2 do
@@ -72,8 +66,8 @@ describe "overriding the age constants" do
     end
   end
 
-  context "SENIOR = 75" do
-    let(:constant) { "Agery::SENIOR" }
+  context "senior = 75" do
+    let(:method) { :senior }
     let(:age) { 75 }
 
     describe 2 do
